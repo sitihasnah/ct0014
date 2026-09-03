@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playbook Pembelajaran: Pasukan & Peranan Multimedia</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            pixel: ['"Press Start 2P"', 'cursive'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            },
+            accent: {
+              teal: '#0d9488',
+              amber: '#d97706',
+              rose: '#e11d48',
+              emerald: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    
+    .page-transition {
+      transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+    }
+    .page-hidden {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .page-active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Background Latar Sijil Ceria */
+    .bg-cert-festive {
+      background: linear-gradient(135deg, #fffbeb 0%, #ffffff 40%, #f0fdf4 75%, #eff6ff 100%);
+      background-image: 
+        radial-gradient(#f59e0b 0.75px, transparent 0.75px), 
+        radial-gradient(#06b6d4 0.75px, transparent 0.75px),
+        radial-gradient(#ec4899 0.75px, transparent 0.75px);
+      background-size: 28px 28px, 36px 36px, 44px 44px;
+      background-position: 0 0, 14px 14px, 22px 22px;
+    }
+
+    .bg-cert-pixel {
+      background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #e0f2fe 65%, #86efac 66%, #4ade80 100%);
+    }
+
+    /* Cetakan Khas Sijil Bersih */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #certificatePrintArea, #certificatePrintArea * {
+        visibility: visible !important;
+      }
+      #certificatePrintArea {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: white !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+  <!-- Bar Atas Mudah Alih -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 px-4 py-3 flex items-center justify-between lg:hidden shadow-sm no-print">
+    <div class="flex items-center space-x-3">
+      <button id="mobileMenuBtn" onclick="toggleSidebar()" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none" aria-label="Buka Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <span class="font-bold text-slate-900 text-sm tracking-tight">Playbook Multimedia</span>
+    </div>
+    
+    <div class="flex items-center space-x-2">
+      <span id="mobileProgressText" class="text-xs font-semibold text-brand-600 bg-brand-50 px-2 py-1 rounded-full border border-brand-100">
+        1/8 (13%)
+      </span>
+    </div>
+  </header>
+
+  <div class="flex-1 flex overflow-hidden max-w-7xl w-full mx-auto">
+
+    <!-- Panel Navigasi Sisi (Sidebar) -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-72 bg-white border-r border-slate-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-between lg:static lg:z-auto shadow-lg lg:shadow-none no-print">
+      
+      <div>
+        <div class="p-5 border-b border-slate-100">
+          <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 mb-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span>DURING CLASS MODE</span>
+          </div>
+          <h1 class="font-extrabold text-slate-900 text-lg leading-snug">
+            Pasukan & Peranan Multimedia
+          </h1>
+          <p class="text-xs text-slate-500 mt-1">Interactive Learning Companion</p>
+        </div>
+
+        <div class="px-5 py-4 bg-slate-50 border-b border-slate-100">
+          <div class="flex justify-between items-center text-xs font-medium text-slate-600 mb-1.5">
+            <span>Kemajuan Pembelajaran</span>
+            <span id="sidebarProgressCount" class="font-bold text-brand-600">1 daripada 8</span>
+          </div>
+          <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+            <div id="sidebarProgressBar" class="bg-brand-600 h-2 rounded-full transition-all duration-300" style="width: 12.5%;"></div>
+          </div>
+        </div>
+
+        <nav class="p-3 space-y-1">
+          <button onclick="navigateToPage(1)" id="nav-step-1" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group bg-brand-50 text-brand-700 border border-brand-200 shadow-sm">
+            <span class="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center font-bold text-xs mr-3 shrink-0">1</span>
+            <div class="truncate">
+              <div class="font-bold">START HERE</div>
+              <div class="text-[10px] text-slate-500 font-normal">Pengenalan & LO</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(2)" id="nav-step-2" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">2</span>
+            <div class="truncate">
+              <div class="font-bold">LEARN</div>
+              <div class="text-[10px] text-slate-500 font-normal">5 Role Clusters & RACI</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(3)" id="nav-step-3" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">3</span>
+            <div class="truncate">
+              <div class="font-bold">WATCH</div>
+              <div class="text-[10px] text-slate-500 font-normal">Analisis Kes Video</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(4)" id="nav-step-4" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">4</span>
+            <div class="truncate">
+              <div class="font-bold">ROLE MATCHING</div>
+              <div class="text-[10px] text-slate-500 font-normal">Padanan Personel & Cluster</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(5)" id="nav-step-5" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">5</span>
+            <div class="truncate">
+              <div class="font-bold">TRY</div>
+              <div class="text-[10px] text-slate-500 font-normal">Aktiviti Task Owner</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(6)" id="nav-step-6" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">6</span>
+            <div class="truncate">
+              <div class="font-bold">CHECK</div>
+              <div class="text-[10px] text-slate-500 font-normal">Semakan & Feedback</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(7)" id="nav-step-7" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">7</span>
+            <div class="truncate">
+              <div class="font-bold">AI LAB</div>
+              <div class="text-[10px] text-slate-500 font-normal">NotebookLM & Studio Aset</div>
+            </div>
+          </button>
+
+          <button onclick="navigateToPage(8)" id="nav-step-8" class="w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100">
+            <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300">8</span>
+            <div class="truncate">
+              <div class="font-bold">REFLECT</div>
+              <div class="text-[10px] text-slate-500 font-normal">Refleksi & Sijil Ceria</div>
+            </div>
+          </button>
+        </nav>
+      </div>
+
+      <div class="p-4 border-t border-slate-100 bg-slate-50/50">
+        <div class="text-[11px] text-slate-500 flex items-center space-x-2">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>Gunakan navigasi untuk bergerak.</span>
+        </div>
+      </div>
+    </aside>
+
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-30 hidden lg:hidden no-print"></div>
+
+    <!-- Ruang Kandungan Utama -->
+    <main class="flex-1 flex flex-col min-w-0 bg-white overflow-y-auto">
+      
+      <div class="hidden lg:flex items-center justify-between border-b border-slate-100 px-8 py-4 bg-slate-50/50 no-print">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Halaman Aktif:</span>
+          <span id="desktopCurrentPageTitle" class="text-xs font-bold text-brand-600 bg-brand-50 border border-brand-200 px-2.5 py-1 rounded-md">
+            1. START HERE
+          </span>
+        </div>
+        <div class="flex items-center space-x-3">
+          <span id="desktopProgressPercent" class="text-xs font-bold text-slate-700">Kemajuan: 13%</span>
+          <div class="w-32 bg-slate-200 rounded-full h-2 overflow-hidden">
+            <div id="desktopProgressBar" class="bg-brand-600 h-2 rounded-full transition-all duration-300" style="width: 12.5%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 p-5 sm:p-8 lg:p-10 max-w-4xl mx-auto w-full">
+
+        <!-- ==================== SEKSYEN 1: START HERE ==================== -->
+        <section id="page-1" class="page-transition page-active space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-brand-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+              <span>Langkah 1 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Mula Di Sini: Pengurusan Pasukan Multimedia
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Selamat datang ke Playbook Interaktif! Dalam sesi ini, kita akan membongkar bagaimana projek multimedia dikendalikan secara berkesan melalui pembahagian peranan yang jelas.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-brand-50 to-indigo-50 border border-brand-100 rounded-2xl p-6 shadow-sm">
+            <div class="flex items-start space-x-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 shadow-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="space-y-2">
+                <h3 class="text-base font-bold text-brand-900 font-display">Hasil Pembelajaran (Learning Outcome)</h3>
+                <p class="text-sm text-brand-800 leading-relaxed">
+                  Pada akhir modul ini, anda dapat <strong class="text-brand-900">memadankan keperluan projek multimedia</strong> dengan kelompok peranan yang betul (<em>Role Clusters</em>) serta <strong class="text-brand-900">melantik pemilik tugas (task owner)</strong> yang jelas untuk mengelakkan pertindihan atau keciciran tugas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 space-y-3">
+            <div class="flex items-center space-x-2 text-amber-800 font-bold text-sm">
+              <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+              </svg>
+              <span>Perbincangan Kelas (Discussion Trigger)</span>
+            </div>
+            <p class="text-slate-700 text-sm font-medium leading-relaxed">
+              Bayangkan projek anda siap tepat pada waktunya, tetapi video utama tidak mempunyai bunyi dan butang navigasi tidak boleh diklik. Siapa yang patut dipersalahkan? 
+            </p>
+            <div class="bg-white/80 p-3.5 rounded-xl border border-amber-200/60 text-xs text-amber-900 italic">
+              "Kekeliruan peranan sering berlaku bukan kerana ahli pasukan malas, tetapi kerana TIADA pemilikan tugas (ownership) yang spesifik."
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="navigateToPage(2)" class="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all">
+              <span>Fahami 5 Role Clusters</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== SEKSYEN 2: LEARN ==================== -->
+        <section id="page-2" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-brand-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+              <span>Langkah 2 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Ketahui 5 Modern Role Clusters
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base">
+              Setiap projek multimedia gabungkan 5 jenis pemikiran berikut. Terokai peranan dan prinsip pengurusan di bawah.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-xs">1</span>
+                <h3 class="font-bold text-slate-900 text-sm">Lead & Strategy</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">Purpose, scope, schedule, client alignment.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-lg bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-xs">2</span>
+                <h3 class="font-bold text-slate-900 text-sm">Content & Learning</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">Research, writing, scripting, instructional design.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-xs">3</span>
+                <h3 class="font-bold text-slate-900 text-sm">Visual & Experience</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">Graphic design, animation, information & interface design.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 font-bold flex items-center justify-center text-xs">4</span>
+                <h3 class="font-bold text-slate-900 text-sm">Audio & Video</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">Recording, lighting, editing, sound design, captions.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm md:col-span-2 space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs">5</span>
+                <h3 class="font-bold text-slate-900 text-sm">Development & Quality</h3>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">Integration, code, testing, publishing, maintenance.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 text-white rounded-2xl p-6 space-y-4">
+            <h3 class="text-sm font-bold tracking-wider text-brand-300 uppercase">Prinsip Utama Pengurusan Pasukan</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 space-y-1.5">
+                <div class="font-bold text-amber-400 text-sm">1. Kejelasan Pemilik (Ownership)</div>
+                <p class="text-slate-300 leading-relaxed">
+                  Setiap tugas wajib ada <strong class="text-white">SATU pemilik utama (Owner)</strong>. Ingat: <em>"Jika semua orang memiliki sesuatu tugas, tiada siapa yang memilikinya."</em>
+                </p>
+              </div>
+              <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 space-y-1.5">
+                <div class="font-bold text-teal-400 text-sm">2. Scaling Pasukan Kecil</div>
+                <p class="text-slate-300 leading-relaxed">
+                  Pasukan kecil boleh memegang pelbagai peranan (contoh: Person A = Lead + Content), tetapi setiap tugas spesifik tetap perlu ditetapkan pemiliknya.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-2xl p-5 sm:p-6 bg-slate-50/70 space-y-4 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-200">
+              <div>
+                <span class="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-100 text-brand-700 tracking-wider">Paparan Terus Fail Drive</span>
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mt-1">Rajah Matriks RACI-Lite & Task Ownership</h3>
+              </div>
+              <a href="https://drive.google.com/file/d/1FU_Bydib4gjwxxoK1Nz1xR_SQxROcr0f/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 text-xs font-bold text-brand-700 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 border border-brand-200 px-3 py-1.5 rounded-lg transition-all shadow-xs">
+                <span>Buka Tab Baharu</span>
+              </a>
+            </div>
+
+            <div class="w-full bg-white rounded-xl border border-slate-200 overflow-hidden shadow-inner flex flex-col">
+              <iframe 
+                src="https://drive.google.com/file/d/1FU_Bydib4gjwxxoK1Nz1xR_SQxROcr0f/preview" 
+                class="w-full h-80 sm:h-[460px] border-0" 
+                allow="autoplay"
+                title="Rajah RACI-Lite Matrix Drive Preview">
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEKSYEN 3: WATCH ==================== -->
+        <section id="page-3" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-brand-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+              <span>Langkah 3 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Tonton & Analisis Kes Krisis Projek
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base">
+              Saksikan senario bagaimana ketiadaan pemilik tugas menyebabkan tugasan berulang dan keciciran fail.
+            </p>
+          </div>
+
+          <div class="bg-black rounded-2xl overflow-hidden shadow-lg border border-slate-800">
+            <div class="relative w-full aspect-video bg-black">
+              <iframe 
+                class="absolute inset-0 w-full h-full border-0"
+                src="https://www.youtube-nocookie.com/embed/MCzQaCmjoB4?rel=0" 
+                title="Video Kes Krisis Pasukan Multimedia"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center space-x-2 text-indigo-900 font-bold text-sm">
+              <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Soalan Perbincangan Krisis Pasukan</span>
+            </div>
+
+            <div class="space-y-3 text-xs sm:text-sm text-indigo-950">
+              <p><strong>Soalan 1:</strong> Peranan Manakah Yang Terlepas Pandang?</p>
+              <p><strong>Soalan 2:</strong> Apakah Kesannya Kepada Projek?</p>
+
+              <details class="group bg-white p-3.5 rounded-xl border border-indigo-200/80 cursor-pointer">
+                <summary class="font-bold text-brand-700 flex items-center justify-between text-xs">
+                  <span>💡 Klik di sini untuk Tip & Petunjuk Jawapan</span>
+                  <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <div class="mt-3 pt-3 border-t border-slate-100 space-y-2 text-xs text-slate-700 leading-relaxed">
+                  <p><strong>Rumusan Jawapan Guru:</strong></p>
+                  <p>• <strong>Peranan terlepas pandang:</strong> <em>Lead & Strategy (Kelompok 1)</em> terlepas pandang dalam menetapkan SOP Pengurusan Fail (folder berpusat) dan pembahagian jawatan (Matriks RACI) yang jelas.</p>
+                  <p>• <strong>Kesan:</strong> Pembaziran masa akibat pertindihan kerja (work duplication) dan kegagalan integrasi sistem (system error) akibat fail tidak dijumpai.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEKSYEN 4: ROLE MATCHING ==================== -->
+        <section id="page-4" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-teal-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+              <span>Langkah 4 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Padanan Personel ke Role Clusters
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base">
+              Siapakah yang memegang gelaran jawatan ini? Padankan setiap <strong>gelaran personel / peranan spesifik</strong> berikut ke dalam <strong>Role Cluster</strong> yang betul.
+            </p>
+          </div>
+
+          <form id="personelMatchingForm" onsubmit="handlePersonelSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Personel 1 -->
+              <div id="card_p1" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">👔 Project Leader / Manager</span>
+                  <span id="badge_p1" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Merancang jadual, berkomunikasi dengan pelanggan, dan memantau keseluruhan skop projek.</p>
+                <select id="p1_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 2 -->
+              <div id="card_p2" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">📝 Script Writer & Copywriter</span>
+                  <span id="badge_p2" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Menulis dialog, teks penjelasan, skrip penceritaan, dan mengolah fakta maklumat.</p>
+                <select id="p2_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 3 -->
+              <div id="card_p3" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">📐 Storyboard Artist / Designer</span>
+                  <span id="badge_p3" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Menyediakan lakaran alur skrin, struktur penceritaan visual, dan aliran pengajaran.</p>
+                <select id="p3_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 4 -->
+              <div id="card_p4" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">🎨 Graphic & UI/UX Designer</span>
+                  <span id="badge_p4" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Mencipta elemen grafik, ikon, susun atur skrin, skema warna, dan navigasi pengguna.</p>
+                <select id="p4_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 5 -->
+              <div id="card_p5" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">📽️ Videographer & Video Editor</span>
+                  <span id="badge_p5" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Merakam video, mengendalikan pencahayaan, menyunting klip, dan menambah sari kata.</p>
+                <select id="p5_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 6 -->
+              <div id="card_p6" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">🎵 Audio Engineer & Sound Designer</span>
+                  <span id="badge_p6" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Merakam suara latar (voiceover), mengadun lagu latar, dan menghasilkan kesan bunyi (SFX).</p>
+                <select id="p6_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 7 -->
+              <div id="card_p7" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">💻 Web / Multimedia Programmer</span>
+                  <span id="badge_p7" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Menulis pengkodan interaktif, mengintegrasikan media ke dalam aplikasi, dan menerbitkan sistem.</p>
+                <select id="p7_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+
+              <!-- Personel 8 -->
+              <div id="card_p8" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-xs transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-900">🧪 Software Tester / QA Specialist</span>
+                  <span id="badge_p8" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Pilih Cluster</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Menguji ralat/bug, memastikan pautan berfungsi, dan mengesahkan kebolehan akses.</p>
+                <select id="p8_select" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <option value="">-- Pilih Role Cluster --</option>
+                  <option value="Lead & Strategy">Lead & Strategy</option>
+                  <option value="Content & Learning">Content & Learning</option>
+                  <option value="Visual & Experience">Visual & Experience</option>
+                  <option value="Audio & Video">Audio & Video</option>
+                  <option value="Development & Quality">Development & Quality</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Sepanduk Status Maklum Balas Padanan -->
+            <div id="personelResultBox" class="hidden p-4 rounded-xl bg-slate-100 border border-slate-200 space-y-1 text-xs">
+              <span id="personelScoreText" class="font-extrabold text-slate-900 text-sm"></span>
+              <p id="personelFeedbackText" class="text-slate-600"></p>
+            </div>
+
+            <div class="pt-2 flex items-center justify-between">
+              <button type="submit" class="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm rounded-xl shadow-md transition-all">
+                Semak Padanan Personel
+              </button>
+
+              <button type="button" onclick="navigateToPage(5)" class="px-5 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl transition-all">
+                Teruskan ke Aktiviti TRY →
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ==================== SEKSYEN 5: TRY ==================== -->
+        <section id="page-5" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-brand-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+              <span>Langkah 5 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Uji Diri: Agihan Tugas & Pemilik Utama
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base">
+              Padankan 4 tugasan kritikal berikut kepada <strong>Role Cluster</strong> yang tepat dan lantik <strong>1 Pemilik Utama (Task Owner)</strong>.
+            </p>
+          </div>
+
+          <form id="tryActivityForm" onsubmit="handleTrySubmit(event)" class="space-y-5">
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tugasan 1</span>
+                  <h3 class="font-bold text-slate-900 text-base">Penyediaan Skrip & Penceritaan</h3>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Role Cluster:</label>
+                  <select id="task1_cluster" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Cluster --</option>
+                    <option value="Lead & Strategy">Lead & Strategy</option>
+                    <option value="Content & Learning">Content & Learning</option>
+                    <option value="Visual & Experience">Visual & Experience</option>
+                    <option value="Audio & Video">Audio & Video</option>
+                    <option value="Development & Quality">Development & Quality</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Lantik Pemilik Utama (1 Person):</label>
+                  <select id="task1_owner" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Owner --</option>
+                    <option value="Siti (Content Writer)">Siti (Writer)</option>
+                    <option value="Semua Ahli Pasukan">Semua Ahli Pasukan</option>
+                    <option value="Tiada Siapa">Tiada Siapa Khusus</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tugasan 2</span>
+                  <h3 class="font-bold text-slate-900 text-base">Reka Bentuk UI & Antaramuka</h3>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Role Cluster:</label>
+                  <select id="task2_cluster" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Cluster --</option>
+                    <option value="Lead & Strategy">Lead & Strategy</option>
+                    <option value="Content & Learning">Content & Learning</option>
+                    <option value="Visual & Experience">Visual & Experience</option>
+                    <option value="Audio & Video">Audio & Video</option>
+                    <option value="Development & Quality">Development & Quality</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Lantik Pemilik Utama (1 Person):</label>
+                  <select id="task2_owner" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Owner --</option>
+                    <option value="Aiman (UI Designer)">Aiman (UI Designer)</option>
+                    <option value="Aiman & Siti Berdua">Aiman & Siti Berdua</option>
+                    <option value="Programmer">Programmer</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tugasan 3</span>
+                  <h3 class="font-bold text-slate-900 text-base">Penyuntingan Audio & Sari Kata</h3>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Role Cluster:</label>
+                  <select id="task3_cluster" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Cluster --</option>
+                    <option value="Lead & Strategy">Lead & Strategy</option>
+                    <option value="Content & Learning">Content & Learning</option>
+                    <option value="Visual & Experience">Visual & Experience</option>
+                    <option value="Audio & Video">Audio & Video</option>
+                    <option value="Development & Quality">Development & Quality</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Lantik Pemilik Utama (1 Person):</label>
+                  <select id="task3_owner" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Owner --</option>
+                    <option value="Chong (Audio Editor)">Chong (Audio Editor)</option>
+                    <option value="Semua Ahli Pasukan">Semua Ahli Pasukan</option>
+                    <option value="Client">Pelanggan Luar</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tugasan 4</span>
+                  <h3 class="font-bold text-slate-900 text-base">Ujian Bug & Aksesibiliti</h3>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Role Cluster:</label>
+                  <select id="task4_cluster" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Cluster --</option>
+                    <option value="Lead & Strategy">Lead & Strategy</option>
+                    <option value="Content & Learning">Content & Learning</option>
+                    <option value="Visual & Experience">Visual & Experience</option>
+                    <option value="Audio & Video">Audio & Video</option>
+                    <option value="Development & Quality">Development & Quality</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Lantik Pemilik Utama (1 Person):</label>
+                  <select id="task4_owner" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <option value="">-- Pilih Owner --</option>
+                    <option value="Dev Lead (QA)">Dev Lead (QA)</option>
+                    <option value="Siti (Writer)">Siti (Writer)</option>
+                    <option value="Tiada Pemilik">Tiada Pemilik</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-2">
+                <span>Hantar & Semak Maklum Balas</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ==================== SEKSYEN 6: CHECK ==================== -->
+        <section id="page-6" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-brand-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+              <span>Langkah 6 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Semakan & Explanatory Feedback
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base">
+              Maklum balas mendalam berdasarkan pilihan anda di halaman TRY.
+            </p>
+          </div>
+
+          <div id="checkSummaryBanner" class="p-5 rounded-2xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Status Padanan</span>
+              <h3 id="checkStatusTitle" class="text-lg font-bold text-slate-900">Sila selesaikan aktiviti di halaman TRY (Langkah 5) dahulu.</h3>
+              <p id="checkStatusSubtitle" class="text-xs text-slate-600">Jawapan anda akan ditinjau secara terperinci di sini.</p>
+            </div>
+            <button onclick="navigateToPage(5)" class="shrink-0 px-4 py-2 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs rounded-lg transition-colors">
+              Kembali ke Langkah 5
+            </button>
+          </div>
+
+          <div id="feedbackContainer" class="space-y-4">
+            <div class="text-center py-8 text-slate-400 text-xs italic">
+              Klik 'Hantar & Semak' di Langkah 5 (TRY) untuk melihat jawapan terperinci.
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEKSYEN 7: AI LAB ==================== -->
+        <section id="page-7" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-purple-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+              <span>Langkah 7 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              AI LAB: NotebookLM & Bank Contoh Prompt
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Gunakan keupayaan AI untuk menganalisa nota rasmi dan menjana bahan persembahan projek multimedia kumpulan anda.
+            </p>
+          </div>
+
+          <!-- Kad Akses Siswa.ai -->
+          <div class="bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200 rounded-2xl p-6 space-y-4 shadow-xs">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2 text-purple-900 font-bold text-base">
+                <span class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm font-extrabold">1</span>
+                <span>Akses & Persediaan NotebookLM di Siswa.ai</span>
+              </div>
+              <a href="https://siswa.ai" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl transition-all flex items-center space-x-1.5 shadow-sm">
+                <span>Buka Siswa.ai</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700 pt-2">
+              <div class="bg-white p-3.5 rounded-xl border border-purple-100 space-y-1">
+                <span class="font-bold text-purple-900">Langkah A: Log Masuk</span>
+                <p>Layari portal rasmi <a href="https://siswa.ai" target="_blank" class="text-purple-700 underline font-semibold">siswa.ai</a> menggunakan akaun pembelajaran anda.</p>
+              </div>
+              <div class="bg-white p-3.5 rounded-xl border border-purple-100 space-y-1">
+                <span class="font-bold text-purple-900">Langkah B: Cipta Notebook</span>
+                <p>Tekan butang <strong>"New Notebook"</strong> dan namakan notebook: <code class="bg-purple-50 text-purple-900 px-1 py-0.5 rounded font-mono">Multimedia - [Nama Kumpulan]</code>.</p>
+              </div>
+              <div class="bg-white p-3.5 rounded-xl border border-purple-100 space-y-1">
+                <span class="font-bold text-purple-900">Langkah C: Muat Naik Sumber</span>
+                <p>Muat naik fail bahan rujukan slaid (PowerPoint/PDF bab ini) ke bahagian <strong>Sources</strong>.</p>
+              </div>
+              <div class="bg-white p-3.5 rounded-xl border border-purple-100 space-y-1">
+                <span class="font-bold text-purple-900">Langkah D: Buka Chat AI</span>
+                <p>Gunakan prompt di bawah untuk memulakan analisa dan penjanaan bahan media secara tersusun.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Misi Penghasilan 3 Aset Media -->
+          <div class="bg-slate-900 text-white rounded-2xl p-6 space-y-4 shadow-md">
+            <div class="border-b border-slate-800 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Tugasan Studio Kumpulan</span>
+                <h3 class="text-lg font-extrabold text-white font-display">2. Misi Hasilkan 3 Aset Media (Pilih 1 Topik Sahaja)</h3>
+              </div>
+              <a href="https://quiz.zep.us/board/6a98e49360a69e1d58769728" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs rounded-lg transition-all flex items-center space-x-1.5 shadow-sm">
+                <span>Hantar ke Board ZEP ↗</span>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div class="p-3 bg-slate-800/90 border border-slate-700 rounded-xl space-y-1">
+                <span class="text-amber-400 font-bold block">Pilihan Topik A:</span>
+                <p class="font-semibold text-white">4 Stages of Multimedia Development</p>
+                <p class="text-[11px] text-slate-400">Plan • Design & Produce • Test • Deliver</p>
+              </div>
+              <div class="p-3 bg-slate-800/90 border border-slate-700 rounded-xl space-y-1">
+                <span class="text-teal-400 font-bold block">Pilihan Topik B:</span>
+                <p class="font-semibold text-white">3 Intangibles Elements</p>
+                <p class="text-[11px] text-slate-400">Creativity • Organization • Communication</p>
+              </div>
+              <div class="p-3 bg-slate-800/90 border border-slate-700 rounded-xl space-y-1">
+                <span class="text-indigo-400 font-bold block">Pilihan Topik C:</span>
+                <p class="font-semibold text-white">5 Clusters of Multimedia Team</p>
+                <p class="text-[11px] text-slate-400">Lead • Content • Visual • Media • Dev</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BANK CONTOH PROMPT NOTEBOOKLM -->
+          <div class="border border-slate-200 rounded-2xl p-6 bg-white space-y-6 shadow-sm">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div>
+                <div class="inline-flex items-center space-x-2 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-purple-100 text-purple-800 tracking-wider">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                  <span>Bank Prompt NotebookLM</span>
+                </div>
+                <h3 class="text-base font-extrabold text-slate-900 mt-1 font-display">3. Contoh Prompt Sedia-Guna (Chat NotebookLM)</h3>
+                <p class="text-xs text-slate-500">Klik butang <strong>"Salin Prompt"</strong> dan tampal terus ke tetingkap chat NotebookLM di Siswa.ai.</p>
+              </div>
+            </div>
+
+            <!-- BAHAGIAN A: PROMPT UNTUK 3 ASET MEDIA -->
+            <div class="space-y-3">
+              <div class="flex items-center space-x-2 text-slate-800 font-bold text-xs">
+                <span class="w-5 h-5 rounded-md bg-purple-100 text-purple-700 flex items-center justify-center text-[10px]">A</span>
+                <span class="uppercase tracking-wider">Prompt Berdasarkan Jenis Aset Media:</span>
+              </div>
+
+              <!-- Prompt 1: Infografik -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:border-purple-300 transition-all space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-purple-900 flex items-center space-x-1.5">
+                    <span>📊</span>
+                    <span>Aset 1: Rangka Kandungan Infografik 1 Muka Surat</span>
+                  </span>
+                  <button onclick="copyPromptText('Berdasarkan sumber rujukan slaid, hasilkan outline kandungan untuk infografik 1 muka surat bagi topik pilihan pasukan kami. Sediakan:\n1. Tajuk utama yang menarik dan padat.\n2. 3 hingga 4 seksyen utama.\n3. Ringkasan poin ringkas (maksimum 2 ayat bagi setiap poin) untuk memudahkan pembacaan.\n4. Cadangan elemen visual/ikon atau carta bagi setiap seksyen.')" class="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white font-bold text-[11px] rounded-lg transition-all shadow-xs flex items-center space-x-1">
+                    <span>Salin Prompt</span>
+                  </button>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-mono bg-white p-2.5 rounded-lg border border-slate-200 select-all">
+                  "Berdasarkan sumber rujukan slaid, hasilkan outline kandungan untuk infografik 1 muka surat bagi topik pilihan pasukan kami. Sediakan: 1. Tajuk utama yang menarik dan padat. 2. 3 hingga 4 seksyen utama. 3. Ringkasan poin ringkas (maksimum 2 ayat bagi setiap poin) untuk memudahkan pembacaan. 4. Cadangan elemen visual/ikon atau carta bagi setiap seksyen."
+                </p>
+              </div>
+
+              <!-- Prompt 2: Slide Deck -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:border-purple-300 transition-all space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-purple-900 flex items-center space-x-1.5">
+                    <span>🖥️</span>
+                    <span>Aset 2: Rangka 5 Slaid & Speaker Notes (Slide Deck)</span>
+                  </span>
+                  <button onclick="copyPromptText('Berdasarkan dokumen sumber, susun rangka pembentangan 5 slaid bagi topik pilihan pasukan kami. Untuk setiap slaid (Slaid 1 hingga 5), nyatakan:\n- Tajuk Slaid (Slide Headline)\n- 3 Poin Utama yang ringkas\n- Skrip Pembentang (Speaker Notes) selama 30-45 saat yang mudah difahami dan bersahaja.')" class="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white font-bold text-[11px] rounded-lg transition-all shadow-xs flex items-center space-x-1">
+                    <span>Salin Prompt</span>
+                  </button>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-mono bg-white p-2.5 rounded-lg border border-slate-200 select-all">
+                  "Berdasarkan dokumen sumber, susun rangka pembentangan 5 slaid bagi topik pilihan pasukan kami. Untuk setiap slaid (Slaid 1 hingga 5), nyatakan: - Tajuk Slaid (Slide Headline) - 3 Poin Utama yang ringkas - Skrip Pembentang (Speaker Notes) selama 30-45 saat yang mudah difahami dan bersahaja."
+                </p>
+              </div>
+
+              <!-- Prompt 3: Video Overview & Audio Deep Dive -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:border-purple-300 transition-all space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-purple-900 flex items-center space-x-1.5">
+                    <span>🎙️</span>
+                    <span>Aset 3: Skrip Video Penerangan 60-90 Saat (Video Overview)</span>
+                  </span>
+                  <button onclick="copyPromptText('Tuliskan skrip penceritaan 60 hingga 90 saat untuk video ringkas yang menerangkan topik pilihan pasukan kami kepada pelajar baharu multimedia. Gunakan struktur berikut:\n1. Hook (Masalah atau soalan mencuit minda: 10 saat)\n2. Isi Pokok (Konsep penting & contoh praktikal: 40 saat)\n3. Kesan / Bahaya jika konsep ini diabaikan (20 saat)\n4. Call to Action / Penutup (10 saat).')" class="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white font-bold text-[11px] rounded-lg transition-all shadow-xs flex items-center space-x-1">
+                    <span>Salin Prompt</span>
+                  </button>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-mono bg-white p-2.5 rounded-lg border border-slate-200 select-all">
+                  "Tuliskan skrip penceritaan 60 hingga 90 saat untuk video ringkas yang menerangkan topik pilihan pasukan kami kepada pelajar baharu multimedia. Gunakan struktur berikut: 1. Hook (10 saat), 2. Isi Pokok (40 saat), 3. Bahaya jika diabaikan (20 saat), 4. Penutup (10 saat)."
+                </p>
+              </div>
+            </div>
+
+            <!-- BAHAGIAN B: PROMPT KHUSUS MENGIKUT TOPIK -->
+            <div class="space-y-3 pt-2 border-t border-slate-100">
+              <div class="flex items-center space-x-2 text-slate-800 font-bold text-xs">
+                <span class="w-5 h-5 rounded-md bg-amber-100 text-amber-700 flex items-center justify-center text-[10px]">B</span>
+                <span class="uppercase tracking-wider">Prompt Soalan Analisis Mengikut Topik Spesifik:</span>
+              </div>
+
+              <!-- Topik A -->
+              <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-amber-900">Topik A: 4 Stages of Multimedia Development</span>
+                  <button onclick="copyPromptText('Berdasarkan nota sumber, terangkan 4 fasa kitaran hayat projek multimedia (Plan, Design & Produce, Test, Deliver). Bagi setiap fasa, berikan SATU risiko terbesar jika fasa berkenaan diabaikan, dan terangkan mengapa ujian PoC (Proof of Concept) penting di peringkat perancangan awal.')" class="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-[10px] rounded-lg transition-all">
+                    Salin Prompt
+                  </button>
+                </div>
+                <p class="text-[11px] text-slate-700 font-mono bg-white/90 p-2 rounded border border-amber-100">
+                  "Berdasarkan nota sumber, terangkan 4 fasa kitaran hayat projek multimedia (Plan, Design & Produce, Test, Deliver). Bagi setiap fasa, berikan SATU risiko terbesar jika fasa berkenaan diabaikan, dan terangkan mengapa ujian PoC (Proof of Concept) penting di peringkat perancangan awal."
+                </p>
+              </div>
+
+              <!-- Topik B -->
+              <div class="p-3.5 rounded-xl border border-teal-200 bg-teal-50/40 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-teal-900">Topik B: 3 Intangibles Elements</span>
+                  <button onclick="copyPromptText('Berdasarkan nota rujukan, jelaskan bagaimana tiga elemen tidak ketara (Creativity, Organization, Communication) menentukan kejayaan kualiti projek multimedia. Berikan contoh situasi sebenar bagaimana kegagalan dalam penamaan fail (Organization) boleh mencetuskan krisis komunikasi dan menjejaskan kualiti kreatif.')" class="px-2.5 py-1 bg-teal-600 hover:bg-teal-700 text-white font-bold text-[10px] rounded-lg transition-all">
+                    Salin Prompt
+                  </button>
+                </div>
+                <p class="text-[11px] text-slate-700 font-mono bg-white/90 p-2 rounded border border-teal-100">
+                  "Berdasarkan nota rujukan, jelaskan bagaimana tiga elemen tidak ketara (Creativity, Organization, Communication) menentukan kejayaan kualiti projek multimedia. Berikan contoh situasi sebenar bagaimana kegagalan dalam penamaan fail (Organization) boleh mencetuskan krisis komunikasi dan menjejaskan kualiti kreatif."
+                </p>
+              </div>
+
+              <!-- Topik C -->
+              <div class="p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/40 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-indigo-900">Topik C: 5 Role Clusters of Multimedia Team</span>
+                  <button onclick="copyPromptText('Berdasarkan nota, rumuskan skop tugas bagi 5 Modern Role Clusters. Huraikan prinsip pemilikan tugas RACI-lite dan bagaimana sebuah pasukan kecil seramai 3 orang boleh mengagihkan peranan (scaling) tanpa kehilangan konsep SATU PEMILIK UTAMA bagi setiap tugasan.')" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[10px] rounded-lg transition-all">
+                    Salin Prompt
+                  </button>
+                </div>
+                <p class="text-[11px] text-slate-700 font-mono bg-white/90 p-2 rounded border border-indigo-100">
+                  "Berdasarkan nota, rumuskan skop tugas bagi 5 Modern Role Clusters. Huraikan prinsip pemilikan tugas RACI-lite dan bagaimana sebuah pasukan kecil seramai 3 orang boleh mengagihkan peranan (scaling) tanpa kehilangan konsep SATU PEMILIK UTAMA bagi setiap tugasan."
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEKSYEN 8: REFLECT & SIJIL CERIA ==================== -->
+        <section id="page-8" class="page-transition page-hidden space-y-6">
+          <div class="space-y-2 border-b border-slate-100 pb-5">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-brand-600 tracking-wide uppercase">
+              <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+              <span>Langkah 8 dari 8</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
+              Refleksi & Sijil Pencapaian Ceria
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base">
+              Kukuhkan kefahaman anda dan raikan kejayaan pasukan dengan menjana sijil persembahan yang ceria dan meriah!
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-brand-950 text-white rounded-2xl p-6 shadow-md space-y-2 border border-indigo-900/50">
+            <div class="inline-flex items-center space-x-2 text-xs font-bold text-amber-300 uppercase tracking-widest">
+              <span>🏆 KEY TAKEAWAY UTAMA</span>
+            </div>
+            <p class="text-base sm:text-lg font-bold text-emerald-300 leading-snug">
+              "Gelaran jawatan boleh fleksibel, tetapi setiap tugas mesti mempunyai seorang pemilik yang jelas."
+            </p>
+          </div>
+
+          <!-- Borang Maklumat Sijil & Refleksi -->
+          <div class="bg-gradient-to-br from-white to-amber-50/40 border border-amber-200/70 rounded-3xl p-6 sm:p-7 space-y-5 shadow-sm">
+            <div class="flex items-center justify-between border-b border-amber-100 pb-3">
+              <div class="space-y-0.5">
+                <h3 class="text-base font-extrabold text-slate-900 font-display flex items-center space-x-2">
+                  <span>✨ Borang Pengiktirafan Pasukan</span>
+                </h3>
+                <p class="text-xs text-slate-500">Masukkan nama kumpulan dan semua rakan sepasukan untuk dipaparkan di sijil rasmi.</p>
+              </div>
+              <span class="hidden sm:inline-flex px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">
+                Sedia Dijana
+              </span>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <label for="teamNameInput" class="block font-bold text-slate-800 text-xs mb-1">Nama Pasukan (Team / Studio Name):</label>
+                <input id="teamNameInput" type="text" value="KUMPULAN CYBERQUEST" placeholder="contoh: Kumpulan CyberQuest" class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white text-slate-800 font-semibold shadow-xs">
+              </div>
+
+              <div>
+                <label for="teamMembersInput" class="block font-bold text-slate-800 text-xs mb-1">Nama Semua Ahli Pasukan (Pisahkan dengan koma):</label>
+                <textarea id="teamMembersInput" rows="2" placeholder="contoh: Siti (Writer), Aiman (UI), Chong (Audio), Rahul (Lead)" class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white text-slate-800 shadow-xs font-medium">Siti (Writer), Aiman (UI), Chong (Audio), Rahul (Dev Lead)</textarea>
+              </div>
+
+              <div>
+                <label for="reflectionInput" class="block font-bold text-slate-800 text-xs mb-1">Soalan Refleksi Anda:</label>
+                <p class="text-[11px] text-slate-500 mb-1.5">Bagaimana pasukan anda mengelakkan keciciran kerja sekiranya seorang individu memegang dua peranan?</p>
+                <textarea id="reflectionInput" rows="2" placeholder="Tuliskan komitmen atau refleksi pengurusan pasukan anda di sini..." class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white text-slate-800 shadow-xs">Kami menggunakan satu checklist tugasan dengan hanya SATU pemilik utama bagi setiap deliverables agar tiada pertindihan kerja.</textarea>
+              </div>
+
+              <!-- Pilihan Tema Sijil Ceria -->
+              <div class="pt-1">
+                <span class="block font-bold text-slate-800 text-xs mb-2">Pilih Rekaan Latar Sijil:</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="flex items-center p-3 rounded-xl border-2 border-amber-400 bg-amber-50/60 cursor-pointer transition-all hover:bg-amber-100/60 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-100">
+                    <input type="radio" name="certTheme" value="festive" checked onchange="updateCertTheme()" class="text-amber-600 focus:ring-amber-500">
+                    <div class="ml-3 text-left">
+                      <div class="font-bold text-xs text-amber-950">🌟 Edisi Gemilang Ceria (Festive Gold)</div>
+                      <div class="text-[10px] text-amber-800">Paling disyorkan: Berseri, konfeti pesta, piala emas & warna ceria.</div>
+                    </div>
+                  </label>
+
+                  <label class="flex items-center p-3 rounded-xl border-2 border-slate-200 bg-white cursor-pointer transition-all hover:bg-slate-50 has-[:checked]:border-sky-500 has-[:checked]:bg-sky-50">
+                    <input type="radio" name="certTheme" value="pixel" onchange="updateCertTheme()" class="text-sky-600 focus:ring-sky-500">
+                    <div class="ml-3 text-left">
+                      <div class="font-bold text-xs text-slate-900">🎮 Edisi Pixel Party (Retro Ceria)</div>
+                      <div class="text-[10px] text-slate-600">Latar langit biru ceria, pelangi, hati retro, dan seni watak pixel.</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="reflectionStatusToast" class="hidden p-3 rounded-xl text-xs font-semibold flex items-center justify-between transition-all">
+              <span id="reflectionStatusText"></span>
+              <button onclick="dismissStatusToast()" class="text-slate-400 hover:text-slate-700 ml-2 font-bold">×</button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 pt-2 border-t border-amber-200/60">
+              <button onclick="generateCertificate()" class="px-5 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs rounded-xl transition-all flex items-center space-x-2 shadow-md hover:scale-[1.02]">
+                <span>🎉 Jana & Kemas Kini Sijil</span>
+              </button>
+
+              <button onclick="copyReflection()" class="px-4 py-3 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition-all flex items-center space-x-1.5 shadow-sm">
+                <span>Salin Refleksi</span>
+              </button>
+
+              <a href="https://quiz.zep.us/board/6a98c9cece8dc5e3bb827705" target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl transition-all flex items-center space-x-1.5 shadow-sm">
+                <span>Papan ZEP Refleksi</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- ==================== RUANG SIJIL CERIA BERKUALITI TINGGI ==================== -->
+          <div id="certificatePrintArea" class="space-y-4 pt-2">
+            <div class="flex items-center justify-between no-print bg-amber-100/70 p-3 rounded-2xl border border-amber-300">
+              <div class="flex items-center space-x-2">
+                <span class="text-lg">🎉</span>
+                <span class="font-bold text-amber-950 text-xs">Pratonton Sijil Pencapaian Pasukan (Sedia untuk Disimpan)</span>
+              </div>
+              <button onclick="window.print()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl transition-all shadow-md flex items-center space-x-1.5">
+                <span>🖨️ Cetak / Simpan PDF</span>
+              </button>
+            </div>
+
+            <!-- Kad Sijil Utama (Rekaan Ceria Penuh Warna) -->
+            <div id="certCard" class="relative w-full rounded-3xl overflow-hidden border-8 border-amber-300 shadow-2xl p-6 sm:p-10 text-slate-900 min-h-[540px] flex flex-col justify-between transition-all bg-cert-festive">
+              
+              <!-- Elemen Hiasan Sudut Ornate -->
+              <div class="absolute top-3 left-3 w-10 h-10 border-t-4 border-l-4 border-amber-500 rounded-tl-xl pointer-events-none"></div>
+              <div class="absolute top-3 right-3 w-10 h-10 border-t-4 border-r-4 border-amber-500 rounded-tr-xl pointer-events-none"></div>
+              <div class="absolute bottom-3 left-3 w-10 h-10 border-b-4 border-l-4 border-amber-500 rounded-bl-xl pointer-events-none"></div>
+              <div class="absolute bottom-3 right-3 w-10 h-10 border-b-4 border-r-4 border-amber-500 rounded-br-xl pointer-events-none"></div>
+
+              <!-- Hiasan Konfeti Visual Latar Belakang -->
+              <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-35" aria-hidden="true">
+                <div class="absolute top-6 left-12 text-2xl rotate-12">🎈</div>
+                <div class="absolute top-10 right-20 text-xl -rotate-12">⭐</div>
+                <div class="absolute top-24 left-1/4 text-sm rotate-45 text-rose-500">✦</div>
+                <div class="absolute top-16 right-1/3 text-lg text-emerald-500">🎉</div>
+                <div class="absolute bottom-16 left-20 text-xl text-amber-500">✨</div>
+                <div class="absolute bottom-12 right-1/4 text-2xl -rotate-12">🎊</div>
+                <div class="absolute top-1/2 right-12 text-sm text-cyan-500">◆</div>
+              </div>
+
+              <!-- Kepala Sijil (Header) -->
+              <div class="relative text-center space-y-2 z-10">
+                <!-- Reben Anugerah Atas -->
+                <div class="inline-flex items-center space-x-2 px-5 py-1.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 text-slate-950 font-black text-[11px] sm:text-xs tracking-widest uppercase shadow-md border border-amber-200">
+                  <span>🏆 SIJIL PENCAPAIAN CEMERLANG 🏆</span>
+                </div>
+
+                <h2 id="certMainHeading" class="text-2xl sm:text-4xl font-black font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-orange-600 to-indigo-800 drop-shadow-xs pt-1">
+                  PENGURUSAN PASUKAN MULTIMEDIA
+                </h2>
+                
+                <p class="text-xs sm:text-sm font-semibold text-slate-600 max-w-lg mx-auto">
+                  Dengan ini diperakui bahawa pasukan kreatif berikut telah berjaya menamatkan cabaran simulasi dan penguasaan peranan projek:
+                </p>
+              </div>
+
+              <!-- Nama Pasukan & Pengiktirafan Tengah -->
+              <div class="relative my-4 py-5 px-6 rounded-2xl bg-white/90 backdrop-blur-md border-2 border-amber-300/80 shadow-lg text-center space-y-3 z-10">
+                <span class="text-[10px] font-black uppercase tracking-widest text-amber-700 bg-amber-100 px-3 py-0.5 rounded-full inline-block">
+                  NAMA PASUKAN (TEAM HONORS)
+                </span>
+                
+                <h3 id="certTeamName" class="text-2xl sm:text-4xl font-black font-display text-indigo-950 tracking-wide uppercase">
+                  KUMPULAN CYBERQUEST
+                </h3>
+
+                <p class="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+                  Menunjukkan kefahaman cemerlang terhadap konsep <strong class="text-indigo-900">5 Modern Role Clusters</strong>, pembahagian peranan <strong class="text-indigo-900">RACI-Lite</strong>, dan akauntabiliti pemilik tugasan.
+                </p>
+
+                <!-- Senarai Ahli Pasukan (Kad Berwarna Ceria) -->
+                <div class="pt-2">
+                  <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-2">
+                    BARISAN AHLI PASUKAN (CREATIVE CREW):
+                  </div>
+                  <div id="certMembersList" class="flex flex-wrap justify-center gap-2">
+                    <!-- Dinamik dimasukkan di sini -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kaki Sijil (Footer dengan Meterai Emas & Tarikh) -->
+              <div class="relative flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t-2 border-amber-300/60 z-10 text-xs text-slate-700">
+                <!-- Cop Emas Rasmi -->
+                <div class="flex items-center space-x-3">
+                  <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-300 to-amber-600 border-2 border-amber-200 shadow-md flex items-center justify-center text-center p-1 font-black text-[9px] leading-tight text-amber-950 rotate-[-8deg] shrink-0">
+                    <div>
+                      <span>★ 100% ★</span><br>
+                      <span class="text-[8px] tracking-tighter">VERIFIED</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-black text-slate-900 text-xs">MULTIMEDIA LEARNING COMPANION</div>
+                    <div class="text-[10px] text-slate-500">Status: Modul Selesai Sepenuhnya</div>
+                  </div>
+                </div>
+
+                <!-- Tarikh & Bukti Sesi -->
+                <div class="text-center sm:text-right">
+                  <div class="text-[10px] text-slate-500 uppercase tracking-wider">TARIKH PENGANUGERAHAN:</div>
+                  <div id="certDateText" class="font-extrabold text-slate-900 text-sm">04/09/2026</div>
+                  <div class="text-[9px] text-emerald-700 font-bold">✓ Rekod Pembelajaran Disahkan</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Pengawal Navigasi Bawah -->
+      <footer class="mt-auto border-t border-slate-200 bg-white p-4 sm:px-8 flex items-center justify-between sticky bottom-0 z-20 shadow-lg no-print">
+        <button id="prevBtn" onclick="prevPage()" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+          <span>Sebelumnya</span>
+        </button>
+
+        <span id="footerProgressText" class="text-xs font-semibold text-slate-500">
+          Halaman 1 daripada 8
+        </span>
+
+        <button id="nextBtn" onclick="nextPage()" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs transition-all shadow-md">
+          <span>Seterusnya</span>
+        </button>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const totalPages = 8;
+
+    const pageTitles = [
+      "1. START HERE",
+      "2. LEARN",
+      "3. WATCH",
+      "4. ROLE MATCHING",
+      "5. TRY",
+      "6. CHECK",
+      "7. AI LAB",
+      "8. REFLECT"
+    ];
+
+    const personelKeys = {
+      p1: "Lead & Strategy",
+      p2: "Content & Learning",
+      p3: "Content & Learning",
+      p4: "Visual & Experience",
+      p5: "Audio & Video",
+      p6: "Audio & Video",
+      p7: "Development & Quality",
+      p8: "Development & Quality"
+    };
+
+    function handlePersonelSubmit(e) {
+      if (e) e.preventDefault();
+
+      let correctCount = 0;
+      const totalPersonel = 8;
+
+      for (let i = 1; i <= totalPersonel; i++) {
+        const selectVal = document.getElementById(`p${i}_select`).value;
+        const cardEl = document.getElementById(`card_p${i}`);
+        const badgeEl = document.getElementById(`badge_p${i}`);
+        const correctCluster = personelKeys[`p${i}`];
+
+        if (selectVal === correctCluster) {
+          correctCount++;
+          cardEl.className = "p-4 rounded-2xl border-2 border-emerald-400 bg-emerald-50/30 space-y-2 shadow-xs transition-all";
+          badgeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800";
+          badgeEl.innerText = "✓ Tepat";
+        } else {
+          cardEl.className = "p-4 rounded-2xl border-2 border-rose-300 bg-rose-50/30 space-y-2 shadow-xs transition-all";
+          badgeEl.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-800";
+          badgeEl.innerText = `✗ ${correctCluster}`;
+        }
+      }
+
+      const resultBox = document.getElementById('personelResultBox');
+      const scoreText = document.getElementById('personelScoreText');
+      const feedbackText = document.getElementById('personelFeedbackText');
+
+      resultBox.classList.remove('hidden');
+      scoreText.innerText = `Skor Padanan Personel: ${correctCount} / ${totalPersonel}`;
+
+      if (correctCount === totalPersonel) {
+        feedbackText.innerText = "Tahniah! Anda memahami skop tugasan dan gelaran personel bagi kesemua 5 Role Clusters.";
+      } else {
+        feedbackText.innerText = "Teliti kad berbingkai merah di atas untuk melihat pembetulan peranan cluster yang tepat bagi gelaran personel berkenaan.";
+      }
+
+      showToast(`Padanan disemak: ${correctCount}/${totalPersonel} tepat!`, correctCount === totalPersonel ? 'success' : 'warning');
+    }
+
+    const answerKeys = {
+      task1: {
+        correctCluster: "Content & Learning",
+        correctOwner: "Siti (Content Writer)",
+        clusterExplanation: "Penyediaan skrip dan penceritaan adalah teras kepada Content & Learning.",
+        ownerExplanation: "Siti dilantik secara khusus sebagai pemilik tunggal skrip."
+      },
+      task2: {
+        correctCluster: "Visual & Experience",
+        correctOwner: "Aiman (UI Designer)",
+        clusterExplanation: "Reka bentuk antaramuka (UI) adalah tanggungjawab Visual & Experience.",
+        ownerExplanation: "Aiman mengetuai UI secara khusus bagi memastikan kejelasan susun atur."
+      },
+      task3: {
+        correctCluster: "Audio & Video",
+        correctOwner: "Chong (Audio Editor)",
+        clusterExplanation: "Penyuntingan audio dan sari kata berada di bawah Audio & Video.",
+        ownerExplanation: "Chong memegang peranan khusus ini bagi memastikan kualiti audio konsisten."
+      },
+      task4: {
+        correctCluster: "Development & Quality",
+        correctOwner: "Dev Lead (QA)",
+        clusterExplanation: "Ujian bug dan kebolehaksesan adalah tanggungjawab Development & Quality.",
+        ownerExplanation: "Ujian bug memerlukan disiplin khusus daripada pembangun/QA Lead."
+      }
+    };
+
+    function handleTrySubmit(e) {
+      if (e) e.preventDefault();
+
+      const userAnswers = {
+        task1: {
+          title: "Tugasan 1: Penyediaan Skrip & Penceritaan",
+          cluster: document.getElementById('task1_cluster').value,
+          owner: document.getElementById('task1_owner').value
+        },
+        task2: {
+          title: "Tugasan 2: Reka Bentuk UI & Antaramuka",
+          cluster: document.getElementById('task2_cluster').value,
+          owner: document.getElementById('task2_owner').value
+        },
+        task3: {
+          title: "Tugasan 3: Penyuntingan Audio & Sari Kata",
+          cluster: document.getElementById('task3_cluster').value,
+          owner: document.getElementById('task3_owner').value
+        },
+        task4: {
+          title: "Tugasan 4: Ujian Bug & Aksesibiliti",
+          cluster: document.getElementById('task4_cluster').value,
+          owner: document.getElementById('task4_owner').value
+        }
+      };
+
+      let totalPoints = 0;
+      let feedbackHtml = '';
+
+      Object.keys(userAnswers).forEach((key) => {
+        const item = userAnswers[key];
+        const keyData = answerKeys[key];
+        const isClusterCorrect = (item.cluster === keyData.correctCluster);
+        const isOwnerCorrect = (item.owner === keyData.correctOwner);
+
+        if (isClusterCorrect) totalPoints += 1;
+        if (isOwnerCorrect) totalPoints += 1;
+
+        feedbackHtml += `
+          <div class="p-4 rounded-xl border ${isClusterCorrect && isOwnerCorrect ? 'border-emerald-200 bg-emerald-50/40' : 'border-slate-200 bg-white'} space-y-2 text-xs">
+            <h4 class="font-bold text-slate-900 text-sm">${item.title}</h4>
+            <p>• Cluster: <strong>${item.cluster || 'Tiada'}</strong> ${isClusterCorrect ? '✓' : '(Jawapan: ' + keyData.correctCluster + ')'}</p>
+            <p>• Owner: <strong>${item.owner || 'Tiada'}</strong> ${isOwnerCorrect ? '✓' : '(Jawapan: ' + keyData.correctOwner + ')'}</p>
+          </div>
+        `;
+      });
+
+      document.getElementById('feedbackContainer').innerHTML = feedbackHtml;
+      document.getElementById('checkStatusTitle').innerText = `Skor Akauntabiliti Pasukan: ${totalPoints} / 8 Markah`;
+      navigateToPage(6);
+    }
+
+    // Penjana Sijil Ceria yang Diperbaharui
+    function generateCertificate() {
+      const teamName = document.getElementById('teamNameInput').value.trim() || 'KUMPULAN CYBERQUEST';
+      const membersRaw = document.getElementById('teamMembersInput').value.trim();
+      const members = membersRaw ? membersRaw.split(',').map(m => m.trim()) : ['Siti', 'Aiman', 'Chong', 'Rahul'];
+
+      document.getElementById('certTeamName').innerText = teamName.toUpperCase();
+      
+      const badgeColors = [
+        'bg-rose-100 text-rose-800 border-rose-300',
+        'bg-amber-100 text-amber-900 border-amber-300',
+        'bg-emerald-100 text-emerald-800 border-emerald-300',
+        'bg-sky-100 text-sky-800 border-sky-300',
+        'bg-purple-100 text-purple-800 border-purple-300'
+      ];
+
+      const icons = ['🎨', '💻', '🎬', '📝', '✨', '🚀'];
+
+      let membersHtml = '';
+      members.forEach((m, idx) => {
+        const colorClass = badgeColors[idx % badgeColors.length];
+        const icon = icons[idx % icons.length];
+        membersHtml += `
+          <span class="inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-extrabold border ${colorClass} shadow-xs">
+            <span>${icon}</span>
+            <span>${m}</span>
+          </span>`;
+      });
+      document.getElementById('certMembersList').innerHTML = membersHtml;
+      
+      const today = new Date();
+      document.getElementById('certDateText').innerText = today.toLocaleDateString('ms-MY', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+
+      updateCertTheme();
+      showToast('Sijil ceria pasukan berjaya dijana!', 'success');
+
+      // Tatal lembut ke paparan sijil
+      const certArea = document.getElementById('certificatePrintArea');
+      if (certArea) certArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Fungsi Tukar Tema Sijil
+    function updateCertTheme() {
+      const isPixel = document.querySelector('input[name="certTheme"]:checked')?.value === 'pixel';
+      const card = document.getElementById('certCard');
+      const heading = document.getElementById('certMainHeading');
+
+      if (isPixel) {
+        card.className = "relative w-full rounded-3xl overflow-hidden border-8 border-sky-400 shadow-2xl p-6 sm:p-10 text-slate-900 min-h-[540px] flex flex-col justify-between transition-all bg-cert-pixel";
+        heading.className = "text-xl sm:text-3xl font-black font-pixel tracking-tight text-indigo-900 drop-shadow-xs pt-1";
+      } else {
+        card.className = "relative w-full rounded-3xl overflow-hidden border-8 border-amber-300 shadow-2xl p-6 sm:p-10 text-slate-900 min-h-[540px] flex flex-col justify-between transition-all bg-cert-festive";
+        heading.className = "text-2xl sm:text-4xl font-black font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-orange-600 to-indigo-800 drop-shadow-xs pt-1";
+      }
+    }
+
+    function copyPromptText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('✓ Prompt disalin! Tampal terus ke dalam Chat NotebookLM di Siswa.ai.', 'success');
+        }).catch(() => fallbackCopyText(text));
+      } else {
+        fallbackCopyText(text);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const tempArea = document.createElement('textarea');
+      tempArea.value = text;
+      tempArea.style.position = 'fixed';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.focus();
+      tempArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('✓ Prompt disalin! Boleh tampal di Chat NotebookLM.', 'success');
+      } catch (err) {
+        showToast('Sila salin teks secara manual.', 'warning');
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function copyReflection() {
+      const text = document.getElementById('reflectionInput').value.trim();
+      if (!text) {
+        showToast('Sila tulis refleksi terlebih dahulu.', 'warning');
+        return;
+      }
+      copyPromptText(text);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      updateUI();
+      generateCertificate();
+    });
+
+    function navigateToPage(pageNumber) {
+      if (pageNumber < 1 || pageNumber > totalPages) return;
+      
+      const currentEl = document.getElementById(`page-${currentPage}`);
+      if (currentEl) {
+        currentEl.classList.remove('page-active');
+        currentEl.classList.add('page-hidden');
+      }
+
+      currentPage = pageNumber;
+
+      const newEl = document.getElementById(`page-${currentPage}`);
+      if (newEl) {
+        newEl.classList.remove('page-hidden');
+        newEl.classList.add('page-active');
+      }
+
+      closeSidebar();
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.scrollTop = 0;
+
+      updateUI();
+    }
+
+    function nextPage() {
+      if (currentPage < totalPages) navigateToPage(currentPage + 1);
+    }
+
+    function prevPage() {
+      if (currentPage > 1) navigateToPage(currentPage - 1);
+    }
+
+    function updateUI() {
+      const percentage = Math.round((currentPage / totalPages) * 100);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const navBtn = document.getElementById(`nav-step-${i}`);
+        if (!navBtn) continue;
+        const badge = navBtn.querySelector('span');
+        if (i === currentPage) {
+          navBtn.className = "w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group bg-brand-50 text-brand-700 border border-brand-200 shadow-sm";
+          if (badge) badge.className = "w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center font-bold text-xs mr-3 shrink-0";
+        } else {
+          navBtn.className = "w-full flex items-center px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-left group text-slate-600 hover:bg-slate-100";
+          if (badge) badge.className = "w-6 h-6 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0 group-hover:bg-slate-300";
+        }
+      }
+
+      document.getElementById('sidebarProgressCount').innerText = `${currentPage} daripada ${totalPages}`;
+      document.getElementById('sidebarProgressBar').style.width = `${percentage}%`;
+
+      document.getElementById('desktopProgressPercent').innerText = `Kemajuan: ${percentage}%`;
+      document.getElementById('desktopProgressBar').style.width = `${percentage}%`;
+      document.getElementById('desktopCurrentPageTitle').innerText = pageTitles[currentPage - 1];
+
+      document.getElementById('mobileProgressText').innerText = `${currentPage}/${totalPages} (${percentage}%)`;
+      document.getElementById('footerProgressText').innerText = `Halaman ${currentPage} daripada ${totalPages}`;
+
+      document.getElementById('prevBtn').disabled = (currentPage === 1);
+      const nextBtn = document.getElementById('nextBtn');
+      if (currentPage === totalPages) {
+        nextBtn.innerHTML = `<span>Selesai</span>`;
+        nextBtn.onclick = () => showToast("Playbook Pembelajaran Selesai!", "success");
+      } else {
+        nextBtn.innerHTML = `<span>Seterusnya</span>`;
+        nextBtn.onclick = nextPage;
+      }
+    }
+
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('reflectionStatusToast');
+      const text = document.getElementById('reflectionStatusText');
+      if (!toast || !text) return;
+
+      text.innerText = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => dismissStatusToast(), 4000);
+    }
+
+    function dismissStatusToast() {
+      const toast = document.getElementById('reflectionStatusToast');
+      if (toast) toast.classList.add('hidden');
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
